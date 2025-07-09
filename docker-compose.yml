@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  email-service:
+    build: .
+    container_name: email-service
+    networks:
+      - kafka_kafka_network
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
+      SMTP_EMAIL: ${SMTP_EMAIL}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+
+networks:
+  kafka_kafka_network:
+    external: true
